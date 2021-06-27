@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.grapefruit.mybatis.mapper.GrapeMapper">
+
+    <!-- 当flushCache="true"时,mybatis将关闭一级和二级缓存 -->
+    <!-- 官网链接:https://mybatis.org/mybatis-3/zh/sqlmap-xml.html -->
+    <select id="selectGrape" resultType="com.grapefruit.mybatis.Model.Grape" flushCache="true">
+        select * from grape where id = #{id}
+    </select>
+</mapper>
