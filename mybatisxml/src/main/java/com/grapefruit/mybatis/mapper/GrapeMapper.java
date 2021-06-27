@@ -21,6 +21,7 @@ public interface GrapeMapper {
 
     Grape selectGrape(int id);
 
+    int saveGrape(Grape grape);
     //@Select("select " + column + " from grape where id = #{id}")
     //Grape selectGrape(int id);
 }

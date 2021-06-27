@@ -4,9 +4,27 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.grapefruit.mybatis.mapper.GrapeMapper">
 
+    <resultMap id="baseMap" type="com.grapefruit.mybatis.Model.Grape">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="num" column="num"/>
+        <result property="content" jdbcType="VARCHAR" column="content"
+                javaType="com.grapefruit.mybatis.Model.E"
+                typeHandler="com.grapefruit.mybatis.MyTypeHandler.GrapeTypeHandler"/>
+    </resultMap>
+
+    <sql id="columns"> id,`name`,num,content</sql>
+
     <!-- 当flushCache="true"时,mybatis将关闭一级和二级缓存 -->
     <!-- 官网链接:https://mybatis.org/mybatis-3/zh/sqlmap-xml.html -->
-    <select id="selectGrape" resultType="com.grapefruit.mybatis.Model.Grape" flushCache="true">
-        select * from grape where id = #{id}
+    <select id="selectGrape" flushCache="true" resultMap="baseMap" >
+        select
+        <include refid="columns"/>
+        from grape where id = #{id}
     </select>
+
+    <insert id="saveGrape" parameterType="com.grapefruit.mybatis.Model.Grape">
+        insert into grape (id, name, num, content)
+        values (#{id}, #{name}, #{num}, #{content})
+    </insert>
 </mapper>

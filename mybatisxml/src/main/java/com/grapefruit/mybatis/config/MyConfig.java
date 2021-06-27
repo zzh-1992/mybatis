@@ -22,9 +22,9 @@ public class MyConfig {
     @Bean
     public DataSource getDataSource() {
         DruidDataSource dataSource = new DruidDataSource();
-        dataSource.setUsername("******");
-        dataSource.setPassword("******");
-        dataSource.setUrl("jdbc:mysql://******:3306/grapefruit?useUnicode=true&characterEncoding=UTF-8&useSSL=false");
+        dataSource.setUsername("root");
+        dataSource.setPassword("123456");
+        dataSource.setUrl("jdbc:mysql://127.0.0.1:3306/grapefruit?useUnicode=true&characterEncoding=UTF-8&useSSL=false");
         dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
         return dataSource;
     }

@@ -26,7 +26,7 @@ public class Grape {
     private int id;
     private String name;
     private BigInteger num;
-    private String content;
+    private E content;
 
     @Override
     public String toString() {
