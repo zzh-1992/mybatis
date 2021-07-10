@@ -22,6 +22,10 @@
                      javaType="com.grapefruit.mybatis.Model.E"/>
     </typeHandlers>
 
+    <plugins>
+        <plugin interceptor="com.grapefruit.mybatis.interceptor.SqlLogInterceptor"/>
+    </plugins>
+
     <environments default="development">
         <environment id="development">
             <transactionManager type="JDBC"/>
@@ -37,4 +41,5 @@
     <mappers>
         <mapper resource="mapper/GrapeMapper.xml"/>
     </mappers>
+
 </configuration>
