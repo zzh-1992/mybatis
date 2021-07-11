@@ -6,7 +6,6 @@ package com.grapefruit.mybatis.typehandler;
 
 import com.alibaba.fastjson.JSON;
 import com.grapefruit.mybatis.Model.E;
-import com.grapefruit.mybatis.Model.Grape;
 import org.apache.ibatis.type.JdbcType;
 import org.apache.ibatis.type.MappedTypes;
 import org.apache.ibatis.type.TypeHandler;
@@ -34,7 +33,7 @@ import java.sql.SQLException;
  * @version 1.0
  * @date 2021-06-27 11:21 上午
  */
-@MappedTypes({E.class, Grape.class})
+@MappedTypes({E.class})
 public class GrapeTypeHandler<T> implements TypeHandler<T> {
 
     private final Class<T> clazz;

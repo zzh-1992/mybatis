@@ -5,6 +5,7 @@
 package com.grapefruit.mybatis.Model;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -22,6 +23,7 @@ import java.math.BigInteger;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Grape {
     private int id;
     private String name;

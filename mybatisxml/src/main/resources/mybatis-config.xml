@@ -17,14 +17,14 @@
         </settings>-->
 
     <!--注册自定义的TypeHandler-->
-    <typeHandlers>
-        <typeHandler handler="com.grapefruit.mybatis.MyTypeHandler.GrapeTypeHandler" jdbcType="VARCHAR"
+<!--    <typeHandlers>
+        <typeHandler handler="com.grapefruit.mybatis.typehandler.GrapeTypeHandler" jdbcType="VARCHAR"
                      javaType="com.grapefruit.mybatis.Model.E"/>
-    </typeHandlers>
+    </typeHandlers>-->
 
-    <plugins>
+    <!--<plugins>
         <plugin interceptor="com.grapefruit.mybatis.interceptor.SqlLogInterceptor"/>
-    </plugins>
+    </plugins>-->
 
     <environments default="development">
         <environment id="development">
