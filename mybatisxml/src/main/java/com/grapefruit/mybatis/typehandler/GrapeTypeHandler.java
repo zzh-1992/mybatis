@@ -2,10 +2,11 @@
  *Copyright @2021 Grapefruit. All rights reserved.
  */
 
-package com.grapefruit.mybatis.MyTypeHandler;
+package com.grapefruit.mybatis.typehandler;
 
 import com.alibaba.fastjson.JSON;
 import com.grapefruit.mybatis.Model.E;
+import com.grapefruit.mybatis.Model.Grape;
 import org.apache.ibatis.type.JdbcType;
 import org.apache.ibatis.type.MappedTypes;
 import org.apache.ibatis.type.TypeHandler;
@@ -29,35 +30,43 @@ import java.sql.SQLException;
  *                      </typeHandlers>
  *                          )
  *
- *
  * @author zhihuangzhang
  * @version 1.0
  * @date 2021-06-27 11:21 上午
  */
-@MappedTypes(E.class)
-public class GrapeTypeHandler implements TypeHandler<E> {
+@MappedTypes({E.class, Grape.class})
+public class GrapeTypeHandler<T> implements TypeHandler<T> {
+
+    private final Class<T> clazz;
+
+    public GrapeTypeHandler(Class<T> clazz) {
+        if (clazz == null) {
+            throw new IllegalArgumentException("Type argument cannot be null");
+        }
+        this.clazz = clazz;
+    }
 
     @Override
-    public void setParameter(PreparedStatement ps, int i, E parameter, JdbcType jdbcType) throws SQLException {
+    public void setParameter(PreparedStatement ps, int i, T parameter, JdbcType jdbcType) throws SQLException {
         String jsonString = JSON.toJSONString(parameter);
         ps.setString(i, jsonString);
     }
 
     @Override
-    public E getResult(ResultSet rs, String columnName) throws SQLException {
+    public T getResult(ResultSet rs, String columnName) throws SQLException {
         String string = rs.getString(columnName);
-        return JSON.parseObject(string, E.class);
+        return JSON.parseObject(string, clazz);
     }
 
     @Override
-    public E getResult(ResultSet rs, int columnIndex) throws SQLException {
+    public T getResult(ResultSet rs, int columnIndex) throws SQLException {
         String string = rs.getString(columnIndex);
-        return JSON.parseObject(string, E.class);
+        return JSON.parseObject(string, clazz);
     }
 
     @Override
-    public E getResult(CallableStatement cs, int columnIndex) throws SQLException {
+    public T getResult(CallableStatement cs, int columnIndex) throws SQLException {
         String string = cs.getString(columnIndex);
-        return JSON.parseObject(string, E.class);
+        return JSON.parseObject(string, clazz);
     }
 }
