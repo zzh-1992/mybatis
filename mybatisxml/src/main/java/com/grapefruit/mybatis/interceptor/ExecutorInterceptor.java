@@ -2,7 +2,6 @@ package com.grapefruit.mybatis.interceptor;
 
 import org.apache.ibatis.cache.CacheKey;
 import org.apache.ibatis.executor.Executor;
-import org.apache.ibatis.executor.statement.StatementHandler;
 import org.apache.ibatis.mapping.BoundSql;
 import org.apache.ibatis.mapping.MappedStatement;
 import org.apache.ibatis.plugin.Interceptor;
@@ -13,9 +12,6 @@ import org.apache.ibatis.session.ResultHandler;
 import org.apache.ibatis.session.RowBounds;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.util.List;
-import java.util.Locale;
 import java.util.Properties;
 
 /**
@@ -32,6 +28,13 @@ import java.util.Properties;
 public class ExecutorInterceptor implements Interceptor {
     private Properties properties = new Properties();
 
+    /**
+     * this method is modified according to the original method
+     *
+     * @param invocation invocation
+     * @return result
+     * @throws Throwable Throwable
+     */
     @Override
     public Object intercept(Invocation invocation) throws Throwable {
         //获取target
@@ -41,8 +44,8 @@ public class ExecutorInterceptor implements Interceptor {
         Object[] args = invocation.getArgs();
         MappedStatement ms = (MappedStatement) args[0];
         Integer parameter = (Integer) args[1];
-        RowBounds rowBounds = (RowBounds)args[2];
-        ResultHandler resultHandler = (ResultHandler)args[3];
+        RowBounds rowBounds = (RowBounds) args[2];
+        ResultHandler resultHandler = (ResultHandler) args[3];
 
         // get boundSql
         BoundSql boundSql = ms.getBoundSql(parameter);
