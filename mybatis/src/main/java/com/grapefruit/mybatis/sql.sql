@@ -13,7 +13,7 @@ create table t_student
     class_id  varchar(200) null,
     name      varchar(255) null,
     favourite varchar(200) null,
-    `limit`   varchar(200) null
+    up_limit   varchar(200) null
 );
 
 create table t_student_class

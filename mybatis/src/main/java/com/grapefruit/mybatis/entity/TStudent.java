@@ -29,7 +29,7 @@ public class TStudent {
 
     private String favourite;
 
-    private String limit;
+    private String upLimit;
 
     private List<TClass> classList;
 
