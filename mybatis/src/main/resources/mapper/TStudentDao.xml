@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.grapefruit.mybatis.mapper.TStudentDao">
+
+    <resultMap id="classMap" type="com.grapefruit.mybatis.entity.TClass">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+    </resultMap>
+
+
+    <resultMap id="studentMap" type="com.grapefruit.mybatis.entity.TStudent">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="age" jdbcType="INTEGER" property="age"/>
+        <!--<result column="class_id" jdbcType="VARCHAR" property="classId" />-->
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="favourite" jdbcType="VARCHAR" property="favourite"/>
+        <result column="limit" jdbcType="VARCHAR" property="limit"/>
+
+        <association
+                column="class_id"
+                property="tClass"
+                javaType="com.grapefruit.mybatis.entity.TClass"
+                select="selectClassById">
+        </association>
+
+        <collection
+                column="id"
+                property="classList"
+                javaType="java.util.ArrayList"
+                ofType="com.grapefruit.mybatis.entity.TClass"
+                select="selectClass">
+        </collection>
+    </resultMap>
+
+    <select id="selectClassById" resultMap="classMap" parameterType="java.lang.Integer">
+        select c.id, c.name
+        from t_class c
+        where c.id = #{id}
+    </select>
+
+    <select id="selectClass" resultMap="classMap" parameterType="java.lang.Integer">
+        select c.id, c.name
+        from t_student s
+                 left join t_student_class sc on s.id = sc.s_id
+                 left join t_class c on sc.c_id = c.id
+        where s.id = #{id}
+    </select>
+
+
+    <sql id="Base_Column_List">
+        id
+        , age, class_id, `name`, favourite, `limit`
+    </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="studentMap">
+        select s.id,
+               s.age,
+               s.class_id,
+               s.name,
+               s.favourite,
+               s.limit
+        from t_student s
+
+        where s.id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectAll" parameterType="java.lang.Integer" resultMap="studentMap">
+        select *
+        from t_student
+    </select>
+
+
+</mapper>
