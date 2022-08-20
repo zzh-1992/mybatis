@@ -14,7 +14,7 @@
         <!--<result column="class_id" jdbcType="VARCHAR" property="classId" />-->
         <result column="name" jdbcType="VARCHAR" property="name"/>
         <result column="favourite" jdbcType="VARCHAR" property="favourite"/>
-        <result column="limit" jdbcType="VARCHAR" property="limit"/>
+        <result column="up_limit" jdbcType="VARCHAR" property="upLimit"/>
 
         <association
                 column="class_id"
@@ -49,7 +49,7 @@
 
     <sql id="Base_Column_List">
         id
-        , age, class_id, `name`, favourite, `limit`
+        , age, class_id, `name`, favourite, `up_limit`
     </sql>
 
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="studentMap">
@@ -58,7 +58,7 @@
                s.class_id,
                s.name,
                s.favourite,
-               s.limit
+               s.up_limit
         from t_student s
 
         where s.id = #{id,jdbcType=INTEGER}
