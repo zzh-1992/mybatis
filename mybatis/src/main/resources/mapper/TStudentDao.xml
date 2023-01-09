@@ -64,6 +64,9 @@
         where s.id = #{id,jdbcType=INTEGER}
     </select>
 
+    <!-- 嵌套查询(association/collection)的时候建议使用resultMap="studentMap"的方式收集数据
+    (因为关联关系在resultMap中使用association/collection标签进行了定义),
+     该用resultTyp会导致查询的时候不走对应的子查询/关联查询-->
     <select id="selectAll" parameterType="java.lang.Integer" resultMap="studentMap">
         select *
         from t_student
